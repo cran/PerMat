@@ -1,0 +1,191 @@
+---
+title: "Performance Metric of fitted model"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Performance Metric of fitted model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+```
+**Application of Performance Metrics in Predictive Modeling **
+
+## Authors
+
+Pankaj Das (https://orcid.org/0000-0003-1672-2502)
+
+## Introduction
+
+Performance metrics are essential tools for evaluating the accuracy and effectiveness of predictive models. These metrics provide quantifiable measures to assess how well a model's predictions match the actual outcomes. Here are some commonly used performance metrics:
+
+*1.Mean Absolute Error(MAE):*
+It is the average distance between Predicted and original values. Basically, it gives how we have predicted from the actual output. However, there is one limitation i.e. it doesn’t give any idea about the direction of the error which is whether we are under-predicting or over-predicting our data.low MAE values indicate that the model is correctly predicting. Larger MAE values indicate that the model is poor at prediction.
+
+*2.Mean Squared Error(MSE):*
+It is similar to mean absolute error but the difference is it takes the square of the average of between predicted and original values. The main advantage to take this metric is here, it is easier to calculate the gradient whereas, in the case of mean absolute error, it takes complicated programming tools to calculate the gradient. By taking the square of errors it pronounces larger errors more than smaller errors, we can focus more on larger errors.
+
+*3.Root Mean Square Error(RMSE):*
+We can say that RMSE is a metric that can be obtained by just taking the square root of the MSE value. As we know that the MSE metrics are not robust to outliers and so are the RMSE values. This gives higher weightage to the large errors in predictions.
+
+*4.R-squared (R²):*
+The coefficient of determination also called the R-Square is used to evaluate the performance of a linear regression model. It is the amount of variation in the output-dependent attribute which is predictable from the input independent variable(s). It is used to check how well-observed results are reproduced by the model, depending on the ratio of total deviation of results described by the model.
+
+*5.Accuracy*
+Model accuracy is a measure of how well a machine learning (ML) model is able to make predictions or decisions based on data. It is a common metric used to evaluate the performance of ML models, and can be used to compare the performance of different models or to assess the effectiveness of a particular model for a given task.
+
+*6.CVRME:*
+Coefficient of variation of Root mean square is measure of variation of the error in a prediction model, normalized by the mean of the target variable.CVRMSE is defined as the ratio of the root mean square error (RMSE) to the mean of the target variable, multiplied by 100% to express it as a percentage.
+
+CVRMSE=(RMSE/mean(target variable))*100 %
+
+CVRMSE measures the average distance between predicted values and the true values and thus reflects the accuracy of the model. CVRMSE reflects the relative size of errors in the model, compared to the scale of the target variable. CVRMSE is useful metric when target variable has a large scale of the target variable has a large scale or a wide range of values , as it provides a standardized measure of model's performance. A lower CVRMSE indicates a more accurate and reliable model, while a higher CVRMSE indicates a less accurate and more variable model. CVRMSE values can be used in combination with other metrics, such as R-Squared and Mean absolute error (MAE), to provide a comprehensive evaluation of the model's performance.
+
+*7.NRMSE:*
+Normalized root mean square error is a measure of the accuracy of a prediction model, representing the ratio of the root mean squared error to the range of the dependent variable.It is used to compare the performance of different models or to evaluate the accuracy of a model over time.
+The formula of NRMSE is
+
+NRMSE= RMSE/ (Y_max - Y_min)
+
+where Y_max is maximum value of target variable
+Y_min is minimum value of target variable
+
+NRMSE values range from 0 to 1 with lower values indicating better model accuracy.The values can be used to compare the performance of different regression models or to track the performance of the same model over time.
+
+*8.MAPE:* Mean Absolute Percentage Error (MAPE) is a metric used to measure the accuracy of a predictive model. It represents the average of the absolute percentage errors between the actual values and the predicted values.MAPE is expressed as a percentage, making it easy to interpret. It indicates the average percentage error made by the model in its predictions. Lower MAPE values represent better predictive accuracy.
+
+*ME:* Mean Error (ME) is a metric that measures the average difference between the actual values and the predicted values. Unlike other metrics that only consider the magnitude of errors, ME retains the sign of the errors, indicating whether predictions are generally over or under the actual values. ME can be positive or negative.
+A positive ME indicates that, on average, the model's predictions are lower than the actual values (underestimation).
+A negative ME indicates that, on average, the model's predictions are higher than the actual values (overestimation).
+An ME close to zero indicates that the model does not have a significant bias in either direction.
+
+
+## Functions in the R package
+
+**RMSE(actual, predicted):** It help in RMSE calculation of the fitted model
+
+**NRMSE(actual, predicted):** It help inNRMSE calculation of the fitted model.
+
+**CVRMSE(actual, predicted):** It help in CVRMSE calculation of the fitted model.
+
+**R2(actual, predicted):** It help in RSquare calculation of the fitted model.
+
+**accuracy(actual, predicted):** It help in Accuracy calculation of the fitted model.
+
+**ME(actual, predicted):** It help inMaximum error calculation of the fitted model.
+
+**MAPE(actual, predicted):** It help in MAPE calculation of the fitted model.
+
+**MAE(actual, predicted):** It help in MAE calculation of the fitted model.
+
+
+## Uses of the Performance Metrics 
+
+**1.Model Evaluation:**
+Purpose: Metrics such as MAE, MSE, RMSE, and R² help evaluate how well a predictive model performs.
+
+Application: By comparing these metrics across different models, data scientists can determine which model provides the best fit for the data.
+
+**2.Model Selection:**
+Purpose: Performance metrics guide the selection of the most appropriate model for a given problem.
+
+Application: When multiple models are developed, metrics are used to select the model that minimizes error and maximizes explained variance.
+
+**3.Model Tuning:**
+Purpose: Metrics assist in hyperparameter tuning to improve model performance.
+
+Application: During processes like cross-validation, performance metrics are used to adjust model parameters to achieve optimal performance.
+
+**4.Benchmarking:**
+Purpose: Metrics provide benchmarks to compare current models against new or alternative models.
+
+Application: Metrics allow for tracking performance improvements over time or comparing against industry standards.
+
+**5.Error Analysis:**
+Purpose: Identifying the type and magnitude of prediction errors helps in understanding model limitations.
+
+Application: Metrics like MSE and RMSE highlight large errors, while MAE indicates average error, guiding further investigation and refinement.
+
+**6.Decision Making:**
+Purpose: Performance metrics inform business and operational decisions based on model predictions.
+
+Application: Metrics help stakeholders understand the reliability of predictions, influencing strategic decisions in areas like finance, healthcare, marketing, and more.
+
+**7.Model Reporting:**
+Purpose: Clear communication of model performance to stakeholders.
+
+Application: Metrics provide quantitative evidence of model effectiveness, useful for reports, presentations, and documentation.
+
+**8.Algorithm Comparison:**
+Purpose: Metrics facilitate comparison between different types of algorithms (e.g., linear regression vs. decision trees).
+
+Application: By evaluating metrics, one can determine which algorithm better suits the data characteristics and problem requirements.
+
+**9.Ensuring Model Robustness:**
+Purpose: To ensure that a model performs well on unseen data.
+
+Application: Metrics help in validating the robustness and generalizability of the model by comparing performance on training and test datasets.
+
+## Reference
+
+*Das, P., Jha, G. K., Lama, A., Parsad, R. and Mishra, D. (2020). Empirical Mode Decomposition based Support Vector Regression for Agricultural Price Forecasting. Indian Journal of Extension Education, 56(2):7-12.(http://krishi.icar.gov.in/jspui/handle/123456789/44138).*
+
+*Bharti, Das,P.,Banerjee, R., Ahmad, T., Devi, S. and Verma G. (2023).Machine-LearningBased Apple Yield Prediction using Morphological Characters. Horticulturae. 9, (4), 436.https://doi.org/10.3390/horticulturae9040436 *
+
+*Das,P., Jha, G. K., Lama, A.and Parsad, R.(2023). Crop Yield Prediction using Hybrid Machine Learning approach: A Case study of Lentil (Lens culinaris Medik.) Agriculture, 13 (3), 596. https://doi.org/10.3390/agriculture13030596 *
+
+*Das, P. Jha, G. K. and Lama, A. (2023). Empirical Mode Decomposition Based Ensemble Hybrid Machine Learning Models for Agricultural Commodity Price Forecasting. Statistics and Applications, 21(1),99-112.(http://krishi.icar.gov.in/jspui/handle/123456789/77772).*
+
+*Das, P., Jha, G. K., Lama, A. and Bharti (2022). EMD-SVR Hybrid Machine Learning Model and its Application in Agricultural Price Forecasting. Bhartiya Krishi Anusandhan Patrika. (DOI: 10.18805/BKAP385)*
+
+*Das, P. (2019). Study On Machine Learning Techniques Based Hybrid Model for Forecasting in Agriculture. Published Ph.D. Thesis.*
+
+*Choudhury, K., Jha, G. K., Das, P. and Chaturvedi, K. K. (2019). Forecasting Potato Price using Ensemble Artificial Neural Networks. Indian Journal of Extension Education, 55(1):71-77.(http://krishi.icar.gov.in/jspui/handle/123456789/44873).*
+
+*Das, P., Lama, A. and Jha, G. K. (2022). Variational Mode Decomposition based Machine Learning Models Optimized with Genetic Algorithm for Price Forecasting. Journal of the Indian Society of Agricultural Statistics, 76(3), 141-150. (http://krishi.icar.gov.in/jspui/handle/123456789/76648)*
+
+
+
+```{r setup}
+#
+library(PerMat)
+##Example how the package works
+
+#Dataset generation
+
+actual <- c(100, 150, 200, 250, 300, 350, 400, 450, 500, 550)
+predicted <- c(95, 148, 210, 245, 290, 360, 395, 440, 510, 540)
+
+#RMSE calculation of the fitted model
+RMSE(actual, predicted)
+
+#NRMSE calculation of the fitted model
+NRMSE(actual, predicted)
+
+#CVRMSE calculation of the fitted model
+
+CVRMSE(actual, predicted)
+
+#RSquare calculation of the fitted model
+R2(actual, predicted)
+
+
+
+#Maximum error calculation of the fitted model
+ME(actual, predicted)
+
+#MAPE calculation of the fitted model
+MAPE(actual, predicted)
+
+#MAE calculation of the fitted model
+MAE(actual, predicted)
+
+#Accuracy calculation of the fitted model
+accuracy(actual, predicted)
+
+```
